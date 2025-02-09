@@ -1,0 +1,69 @@
+{
+  "name": "watchers-test",
+  "displayName": "Test extension to report bug",
+  "description": "",
+  "version": "0.0.9",
+  "publisher": "sap",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.32.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "watcherTest.copy",
+        "title": "Copy folder",
+        "category": "watcherTest"
+      },
+      {
+        "command": "watcherTest.move",
+        "title": "Move folder",
+        "category": "watcherTest"
+      },
+      {
+        "command": "watcherTest.register",
+        "title": "Register watcher to last copied/moved file",
+        "category": "watcherTest"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "watcherTest.global"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "watcherTest.local",
+          "group": "test"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint . --ext .ts,.tsx",
+    "watch": "tsc -watch -p ./"
+  },
+  "dependencies": {
+    "fs-extra": "10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.0",
+    "@types/vscode": "^1.32.0",
+    "@typescript-eslint/eslint-plugin": "^4.16.0",
+    "@typescript-eslint/parser": "^4.16.0",
+    "eslint": "^7.21.0",
+    "typescript": "^4.4.3",
+    "@types/fs-extra": "9.0.13"
+  }
+}
