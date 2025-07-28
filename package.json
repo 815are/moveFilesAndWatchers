@@ -2,7 +2,7 @@
   "name": "watchers-test",
   "displayName": "Test extension to report bug",
   "description": "",
-  "version": "0.0.9",
+  "version": "0.0.13",
   "publisher": "sap",
   "private": true,
   "license": "MIT",
@@ -19,31 +19,15 @@
   "contributes": {
     "commands": [
       {
-        "command": "watcherTest.copy",
-        "title": "Copy folder",
-        "category": "watcherTest"
-      },
-      {
-        "command": "watcherTest.move",
-        "title": "Move folder",
-        "category": "watcherTest"
-      },
-      {
-        "command": "watcherTest.register",
-        "title": "Register watcher to last copied/moved file",
-        "category": "watcherTest"
+        "command": "fileWatcher.selectAndWatchFile",
+        "title": "Select and watch file",
+        "category": "fileWatcher"
       }
     ],
     "menus": {
       "commandPalette": [
         {
-          "command": "watcherTest.global"
-        }
-      ],
-      "explorer/context": [
-        {
-          "command": "watcherTest.local",
-          "group": "test"
+          "command": "fileWatcher.selectAndWatchFile"
         }
       ]
     }

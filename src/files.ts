@@ -3,6 +3,12 @@ import { basename, join } from "path";
 import * as fsExtra from "fs-extra";
 import { existsSync, promises } from "fs";
 
+export enum MoveCopyOptions {
+  Copy = "Copy",
+  Move = "Move",
+  ApiRename = "ApiRename",
+}
+
 export const selectFolder = async (): Promise<string | undefined> => {
   const options: vscode.OpenDialogOptions = {
     canSelectMany: false,
@@ -16,7 +22,7 @@ export const selectFolder = async (): Promise<string | undefined> => {
 };
 
 export const copyOrMoveFile = async (
-  useMove = false
+  type = MoveCopyOptions.Copy
 ): Promise<string | undefined> => {
   const sourceDir = (await selectFolder()) as string;
   if (!sourceDir) {
@@ -30,8 +36,14 @@ export const copyOrMoveFile = async (
   try {
     const newFolderPath = join(workspaceFolder, "ai-created-cap");
     await promises.mkdir(newFolderPath, { recursive: true });
-    if (useMove) {
+    if (type === MoveCopyOptions.Move) {
       await fsExtra.move(sourceDir, newFolderPath, {
+        overwrite: true,
+      });
+    } else if (type === MoveCopyOptions.ApiRename) {
+      const sourceDirUri = vscode.Uri.file(sourceDir);
+      const newFolderUri = vscode.Uri.file(newFolderPath);
+      await vscode.workspace.fs.rename(sourceDirUri, newFolderUri, {
         overwrite: true,
       });
     } else {
